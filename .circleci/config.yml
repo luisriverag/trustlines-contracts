@@ -8,9 +8,10 @@ templates:
 executors:
   ubuntu-builder:
     docker:
-      - image: trustlines/builder:master37
+      - image: trustlines/builder:featurelatestpythons40
         environment:
           - SOLC_VERSION=v0.8.0
+          - PYTHON_VERSION=3.8
     working_directory: ~/repo
     environment:
       DOCKER_REPO: trustlines/contracts
@@ -25,8 +26,8 @@ commands:
       - run:
           name: Create python venv
           command: |
-            python3 -m venv venv
-            pip install -r dev-requirements.txt pip wheel setuptools
+            python -m venv venv
+            pip install -r dev-requirements.txt wheel
 
   config-path:
     description: "set environment variables and change PATH"
