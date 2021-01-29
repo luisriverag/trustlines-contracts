@@ -8,7 +8,7 @@ templates:
 executors:
   ubuntu-builder:
     docker:
-      - image: trustlines/builder:featurelatestpythons40
+      - image: trustlines/builder:featurelatestpythons41
         environment:
           - SOLC_VERSION=v0.8.0
           - PYTHON_VERSION=3.8
@@ -26,6 +26,7 @@ commands:
       - run:
           name: Create python venv
           command: |
+            python --version
             python -m venv venv
             pip install -r dev-requirements.txt wheel
 
@@ -89,8 +90,8 @@ jobs:
     steps:
       - checkout
       - config-path
-      - restore_cache:
-          key: venv-v2-{{ checksum "dev-requirements.txt" }}
+#      - restore_cache:
+#          key: venv-v2-{{ checksum "dev-requirements.txt" }}
       - create-venv
       - run:
           name: Install requirements
